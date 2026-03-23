@@ -1,17 +1,31 @@
+import api from './api';
 import { Franchise, League, FRANCHISES, LEAGUES } from '../data/franchises';
 
 export const franchiseService = {
   getAllFranchises: async (): Promise<Franchise[]> => {
-    // Returning local data directly as requested
-    return FRANCHISES;
+    try {
+      const response = await api.get('/franchises');
+      return response.data.data;
+    } catch (error) {
+      return FRANCHISES;
+    }
   },
 
   getAllLeagues: async (): Promise<League[]> => {
-    return LEAGUES;
+    try {
+      const response = await api.get('/leagues');
+      return response.data.data;
+    } catch (error) {
+      return LEAGUES;
+    }
   },
 
   updateFranchise: async (id: string, franchiseData: Partial<Franchise>): Promise<Franchise | null> => {
-    // Redux handles the state, so we just return null or the ID
-    return null;
+    try {
+      const response = await api.put(`/franchises/${id}`, franchiseData);
+      return response.data.data;
+    } catch (error) {
+      return null;
+    }
   },
 };

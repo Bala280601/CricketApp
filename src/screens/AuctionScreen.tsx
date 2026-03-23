@@ -88,13 +88,6 @@ const AuctionScreen: React.FC = () => {
     }
   }, [currentBid, currentBidderFranchiseId]);
 
-  const quickBidIncrement = (franchiseId: string) => {
-    const next = currentBidderFranchiseId === null
-      ? currentBid
-      : Math.ceil((currentBid * 1.1) / 5) * 5;
-    dispatch(startAuction());
-  };
-
   const placeQuickBid = (franchiseId: string) => {
     const next = currentBidderFranchiseId === null
       ? currentBid

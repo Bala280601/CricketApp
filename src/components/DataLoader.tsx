@@ -24,18 +24,23 @@ const DataLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         franchiseService.getAllFranchises(),
       ]);
 
-      dispatch(initializeAuction({ players: apiPlayers, franchises: apiFranchises }));
-      setLoading(false);
+      // Wrap in setTimeout to prevent updating state during mount
+      setTimeout(() => {
+        dispatch(initializeAuction({ players: apiPlayers, franchises: apiFranchises }));
+        setLoading(false);
+      }, 0);
     } catch (err) {
-      console.log('API not reachable, falling back to local data:', err);
+      console.log('API loading failed, using secondary fallback:', err);
       
       // Fallback to local .ts files automatically
       // This ensures the app works even if the backend isn't running
-      dispatch(initializeAuction({ 
-        players: PLAYERS, 
-        franchises: FRANCHISES 
-      }));
-      setLoading(false);
+      setTimeout(() => {
+        dispatch(initializeAuction({ 
+          players: PLAYERS, 
+          franchises: FRANCHISES 
+        }));
+        setLoading(false);
+      }, 0);
     }
   };
 

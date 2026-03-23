@@ -7,32 +7,17 @@ const Player = require('./models/Player');
 const Franchise = require('./models/Franchise');
 const League = require('./models/League');
 
+const path = require('path');
+
 // Load env vars
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI);
 
-// Custom function to create stats
-const mkStats = (m, r, avg, sr, f, h, frs, six) => ({
-  matches: m, runs: r, average: avg, strikeRate: sr, fifties: f, hundreds: h, fours: frs, sixes: six,
-});
-const mkBowling = (m, w, eco, bavg, best, fw) => ({
-  matches: m, wickets: w, economy: eco, bowlingAverage: bavg, bestFigures: best, fiveWickets: fw,
-});
-
-// Leagues Data
-const leagues = [
-  { id: 'ipl', name: 'Indian Premier League', shortName: 'IPL', color: '#004BA0' },
-  { id: 'sa20', name: 'SA20 League', shortName: 'SA20', color: '#007A33' },
-  { id: 'bbl', name: 'Big Bash League', shortName: 'BBL', color: '#ED1B24' },
-  { id: 'hundred', name: 'The Hundred', shortName: '100', color: '#E91E63' },
-  { id: 'lpl', name: 'Lanka Premier League', shortName: 'LPL', color: '#005AC7' },
-  { id: 't10', name: 'Abu Dhabi T10', shortName: 'T10', color: '#FFD700' },
-];
-
 // Load Data
-const { players, franchises } = require('./data/seedData');
+const { players, franchises, leagues } = require('./data/seedData');
+
 
 // Import Data
 const importData = async () => {

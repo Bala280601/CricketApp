@@ -213,13 +213,17 @@ const auctionSlice = createSlice({
     },
     initializeAuction(state, action: PayloadAction<{ players: Player[]; franchises: Franchise[] }>) {
       const { players, franchises } = action.payload;
-      state.players = (players || []).map(p => ({ ...p, isSold: false }));
+      state.players = (players || []).map(p => ({ ...p, isSold: p.isSold ?? false }));
       state.franchises = franchises || [];
-      state.soldPlayers = [];
-      state.unsoldPlayers = [];
+      state.soldPlayers = state.players.filter(p => p.isSold);
+      state.unsoldPlayers = []; // We can add logic for unsold if needed
       state.isAuctionStarted = false;
       state.isAuctionComplete = false;
-      state.currentPlayerIndex = 0;
+      state.currentPlayerIndex = state.players.findIndex(p => !p.isSold);
+      if (state.currentPlayerIndex === -1) {
+        state.currentPlayerIndex = 0;
+        state.isAuctionComplete = state.players.length > 0;
+      }
       state.auctionStatus = 'idle';
     },
     addPlayerLocally(state, action: PayloadAction<Player>) {

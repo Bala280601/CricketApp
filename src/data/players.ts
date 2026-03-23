@@ -92,7 +92,7 @@ export const PLAYERS: Player[] = [
   // --- PBKS (f010) ---
   { id: 'pbks01', leagueIds: ['ipl'], name: 'Arshdeep Singh', country: 'India', age: 25, role: 'Bowler', tier: 'GOLD', basePrice: 200, profileColor: '#ED1B24', nationality: 'Indian', speciality: ['Swing Specialist', 'Death Over Star'], batting: { t10: n(), t20: s(60, 40, 5, 100), odi: n(), test: n() }, bowling: { style: 'Left-arm Fast', paceKmh: 140, t10: n(), t20: b(110, 145, 8.2), odi: n(), test: n() }, fielding: { catches: 22, runOuts: 5, agility: 8 } },
   { id: 'pbks02', leagueIds: ['ipl'], name: 'Liam Livingstone', country: 'England', age: 31, role: 'All-Rounder', tier: 'GOLD', basePrice: 200, profileColor: '#ED1B24', nationality: 'Overseas', speciality: ['Monstrous Hitter', 'Versatile Spinner'], batting: { t10: n(), t20: s(240, 5800, 29, 146), odi: n(), test: n() }, bowling: { style: 'Leg-spin', t10: n(), t20: b(180, 105, 8.1), odi: n(), test: n() }, fielding: { catches: 95, runOuts: 12, agility: 9 } },
-],
+];
 
 // Helper to fill squads to 25 players if needed manually
 // For now, I've provided the Top tier real players above.
